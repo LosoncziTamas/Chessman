@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private PieceColor _pieceColor;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    
+    public PieceColor PieceColor => _pieceColor;
+    
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
