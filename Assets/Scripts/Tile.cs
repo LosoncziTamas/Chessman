@@ -1,19 +1,25 @@
+using DefaultNamespace;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private PieceColor _pieceColor;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    public static readonly Color HighlightColorRed = Color.red;
+    public static readonly Color HighlightColorYellow = Color.yellow;
     
-    public PieceColor PieceColor => _pieceColor;
-    
-    private void Start()
+    [SerializeField] private SpriteRenderer _inside;
+    [SerializeField] private SpriteRenderer _border;
+
+    public bool HasPiece => ChessPiece != null;
+    public IChessPiece ChessPiece { get; private set; }
+
+    public void HighLightBorder(Color highlightColor)
     {
-        
+        _border.color = highlightColor;
     }
 
-    private void Update()
+    public void OnSelected()
     {
-        
+        Debug.Log("Selected");
+        HighLightBorder(HighlightColorYellow);
     }
 }
