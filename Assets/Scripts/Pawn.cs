@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace DefaultNamespace
 {
-    public class Pawn : IChessPiece
+    public class Pawn : MonoBehaviour, IChessPiece
     {
         
     }
