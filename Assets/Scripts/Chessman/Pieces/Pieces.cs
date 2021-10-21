@@ -19,7 +19,7 @@ namespace Chessman.Pieces
         {
             var bottomLeftTile = _tileContainer.GetTile(Vector2Int.zero);
             
-            var pawn = Instantiate(_pawnPrefab, bottomLeftTile.transform.position, Quaternion.identity);
+            var pawn = Instantiate(_pawnPrefab, bottomLeftTile.transform.position, Quaternion.identity, transform);
             pawn.Init(Vector2Int.zero, PieceColor.Light);
             bottomLeftTile.ChessPiece = pawn;
             

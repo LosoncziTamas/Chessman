@@ -68,7 +68,16 @@ namespace Chessman
 
             if (_selectedTile != null && _walkableTiles.Contains(tile))
             {
-                _selectedTile.ChessPiece.MovePiece(_tileContainer, tile.Position);
+                _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
+                foreach (var walkableTile in _walkableTiles)
+                {
+                    walkableTile.ClearHighlight();
+                }
+                _selectedTile.ClearHighlight();
+                _selectedTile = null;
+                _walkableTiles.Clear();
+
+                CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using Chessman.Pieces;
 using UnityEngine;
 
@@ -13,12 +14,23 @@ namespace Chessman
 
         public bool HasPiece => ChessPiece != null;
         public IChessPiece ChessPiece { get; set; }
-        
         public Vector2Int Position { get; set; }
-        
+
+        private Color _defaultColor;
+
+        private void Start()
+        {
+            _defaultColor = _inside.color;
+        }
+
         public void HighLightBorder(Color highlightColor)
         {
             _border.color = highlightColor;
+        }
+
+        public void ClearHighlight()
+        {
+            _border.color = _defaultColor;
         }
     
         public void OnSelected()

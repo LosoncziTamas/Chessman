@@ -29,10 +29,12 @@ namespace Chessman.Pieces
             }
         }
 
-        public void MovePiece(TileContainer tileContainer, Vector2Int to)
+        public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
-            transform.position = tileContainer.GetTile(to).transform.position;
-            Position = to;
+            transform.position = to.transform.position;
+            Position = to.Position;
+            to.ChessPiece = this;
+            from.ChessPiece = null;
         }
 
         public void Init(Vector2Int position, PieceColor color)

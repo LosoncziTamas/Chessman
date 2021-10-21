@@ -8,7 +8,7 @@ namespace Chessman.Pieces
         IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer);
         Vector2Int Position { get; }
         PieceColor Color { get; }
-        void MovePiece(TileContainer tileContainer, Vector2Int to);
+        void MovePiece(TileContainer tileContainer, Tile from, Tile to);
 
         void Init(Vector2Int position, PieceColor color);
     }
