@@ -32,11 +32,5 @@ namespace Chessman
         {
             _border.color = _defaultColor;
         }
-    
-        public void OnSelected()
-        {
-            Debug.Log("Selected");
-            HighLightBorder(HighlightColorYellow);
-        }
     }
 }

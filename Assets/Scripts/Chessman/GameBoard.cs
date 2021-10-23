@@ -9,6 +9,7 @@ namespace Chessman
         public PieceColor CurrentTurnColor { get; private set; } = PieceColor.Light;
     
         [SerializeField] private TileContainer _tileContainer;
+        [SerializeField] private Transform _capturedPieceContainer;
         
         private Camera _camera;
 
@@ -41,42 +42,60 @@ namespace Chessman
             }
         }
 
+        private void HighlightWalkableTiles(Tile tile)
+        {
+            var chessPiece = tile.ChessPiece;
+            tile.HighLightBorder(Tile.HighlightColorYellow);
+            _walkableTiles = chessPiece.GetWalkableTiles(_tileContainer).ToList();
+            foreach (var walkableTile in _walkableTiles)
+            {
+                switch (walkableTile.HasPiece)
+                {
+                    case true when walkableTile.ChessPiece.Color != CurrentTurnColor:
+                        walkableTile.HighLightBorder(Tile.HighlightColorRed);
+                        break;
+                    case false:
+                        walkableTile.HighLightBorder(Tile.HighlightColorYellow);
+                        break;
+                }
+            }
+        }
+        
+
+        private void MovePieceToNewPosition(Tile tile)
+        {
+            if (tile.HasPiece)
+            {
+                var capturedPiece = _selectedTile.ChessPiece.MoveAndCapture(_tileContainer, _selectedTile, tile);
+                capturedPiece.Transform.SetParent(_capturedPieceContainer, false);
+            }
+            else
+            {
+                _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
+            }
+            foreach (var walkableTile in _walkableTiles)
+            {
+                walkableTile.ClearHighlight();
+            }
+            _selectedTile.ClearHighlight();
+            _selectedTile = null;
+            _walkableTiles.Clear();
+        }
+
         private void SelectTile(Tile tile)
         {
             if (_selectedTile == null)
             {
                 if (tile.HasPiece && tile.ChessPiece.Color == CurrentTurnColor)
                 {
-                    var chessPiece = tile.ChessPiece;
-                    tile.HighLightBorder(Tile.HighlightColorYellow);
-                    _walkableTiles = chessPiece.GetWalkableTiles(_tileContainer).ToList();
-                    foreach (var walkableTile in _walkableTiles)
-                    {
-                        switch (walkableTile.HasPiece)
-                        {
-                            case true when walkableTile.ChessPiece.Color != CurrentTurnColor:
-                                walkableTile.HighLightBorder(Tile.HighlightColorRed);
-                                break;
-                            case false:
-                                walkableTile.HighLightBorder(Tile.HighlightColorYellow);
-                                break;
-                        }
-                    }
+                    HighlightWalkableTiles(tile);
                     _selectedTile = tile;
                 }
             }
 
             if (_selectedTile != null && _walkableTiles.Contains(tile))
             {
-                _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
-                foreach (var walkableTile in _walkableTiles)
-                {
-                    walkableTile.ClearHighlight();
-                }
-                _selectedTile.ClearHighlight();
-                _selectedTile = null;
-                _walkableTiles.Clear();
-
+                MovePieceToNewPosition(tile);
                 CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
             }
         }

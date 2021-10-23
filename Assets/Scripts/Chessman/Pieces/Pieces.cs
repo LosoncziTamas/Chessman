@@ -17,17 +17,23 @@ namespace Chessman.Pieces
 
         public void Setup()
         {
-            var bottomLeftTile = _tileContainer.GetTile(Vector2Int.zero);
-            
-            var lightPawn = Instantiate(_pawnPrefab, bottomLeftTile.transform.position, Quaternion.identity, transform);
-            lightPawn.Init(bottomLeftTile.Position, PieceColor.Light);
-            bottomLeftTile.ChessPiece = lightPawn;
-            
-            var topLeftTile = _tileContainer.GetTile(new Vector2Int(0, 7));
-            
-            var darkPawn = Instantiate(_pawnPrefab, topLeftTile.transform.position, Quaternion.identity, transform);
-            darkPawn.Init(topLeftTile.Position, PieceColor.Dark);
-            topLeftTile.ChessPiece = darkPawn;
+            SetPawns();
+        }
+
+        private void SetPawns()
+        {
+            for (var x = 0; x < 8; ++x)
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(x, 1));
+                var lightPawn = Instantiate(_pawnPrefab, tile.transform.position, Quaternion.identity, transform);
+                lightPawn.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightPawn;
+                
+                tile = _tileContainer.GetTile(new Vector2Int(x, 6));
+                var darkPawn = Instantiate(_pawnPrefab, tile.transform.position, Quaternion.identity, transform);
+                darkPawn.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkPawn;
+            }
         }
     }
 }

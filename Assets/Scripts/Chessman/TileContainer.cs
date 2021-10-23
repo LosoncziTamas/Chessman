@@ -5,8 +5,8 @@ namespace Chessman
 {
     public class TileContainer : MonoBehaviour
     {
-        private const int BoardDimensionX = 8;
-        private const int BoardDimensionY = 8;
+        public const int BoardDimensionX = 8;
+        public const int BoardDimensionY = 8;
         private const float OffsetX = -3.5f;
         private const float OffsetY = -3.5f;
     

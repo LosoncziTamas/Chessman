@@ -12,8 +12,9 @@ namespace Chessman.Pieces
         public Vector2Int Position { get; private set; }
         
         public PieceColor Color { get; private set; }
+        public Transform Transform => transform;
 
-        
+
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer)
         {
             var movingForward = Color == PieceColor.Light;
@@ -36,6 +37,20 @@ namespace Chessman.Pieces
             to.ChessPiece = this;
             from.ChessPiece = null;
         }
+
+        public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile from, Tile to)
+        {
+            Debug.Assert(to.HasPiece);
+            var capturedPiece = to.ChessPiece;
+            
+            transform.position = to.transform.position;
+            Position = to.Position;
+            to.ChessPiece = this;
+            from.ChessPiece = null;
+
+            return capturedPiece;
+        }
+        
 
         public void Init(Vector2Int position, PieceColor color)
         {
