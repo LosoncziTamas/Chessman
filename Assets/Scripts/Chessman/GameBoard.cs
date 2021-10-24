@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Chessman.Pieces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Chessman
 {
@@ -10,6 +12,7 @@ namespace Chessman
     
         [SerializeField] private TileContainer _tileContainer;
         [SerializeField] private Transform _capturedPieceContainer;
+        [SerializeField] private ChessPieces _chessPieces;
         
         private Camera _camera;
 
@@ -46,7 +49,7 @@ namespace Chessman
         {
             var chessPiece = tile.ChessPiece;
             tile.HighLightBorder(Tile.HighlightColorYellow);
-            _walkableTiles = chessPiece.GetWalkableTiles(_tileContainer).ToList();
+            _walkableTiles = chessPiece.GetWalkableTiles(_tileContainer, _chessPieces).ToList();
             foreach (var walkableTile in _walkableTiles)
             {
                 switch (walkableTile.HasPiece)
@@ -60,7 +63,6 @@ namespace Chessman
                 }
             }
         }
-        
 
         private void MovePieceToNewPosition(Tile tile)
         {
@@ -68,6 +70,7 @@ namespace Chessman
             {
                 var capturedPiece = _selectedTile.ChessPiece.MoveAndCapture(_tileContainer, _selectedTile, tile);
                 capturedPiece.Transform.SetParent(_capturedPieceContainer, false);
+                capturedPiece.IsCaptured = true;
             }
             else
             {
@@ -81,7 +84,7 @@ namespace Chessman
             _selectedTile = null;
             _walkableTiles.Clear();
         }
-
+        
         private void SelectTile(Tile tile)
         {
             if (_selectedTile == null)

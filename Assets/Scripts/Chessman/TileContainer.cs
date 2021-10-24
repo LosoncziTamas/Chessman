@@ -41,8 +41,8 @@ namespace Chessman
 
         public Tile GetTile(Vector2Int pos)
         {
-            Debug.Assert(pos.x >= 0 && pos.x < BoardDimensionX);
-            Debug.Assert(pos.y >= 0 && pos.y < BoardDimensionY);
+            Debug.Assert(pos.x >= 0 && pos.x < BoardDimensionX, $"x: {pos.x}");
+            Debug.Assert(pos.y >= 0 && pos.y < BoardDimensionY, $"y: {pos.y}");
             var result = Tiles[pos.x * BoardDimensionX + pos.y];
             return result;
         }
