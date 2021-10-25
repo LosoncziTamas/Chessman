@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +8,7 @@ namespace Chessman.Pieces
     {
         [SerializeField] private Pawn _pawnPrefab;
         [SerializeField] private King _kingPrefab;
+        [SerializeField] private Bishop _bishopPrefab;
 
         private TileContainer _tileContainer;
         
@@ -37,6 +37,17 @@ namespace Chessman.Pieces
         {
             SetPawns();
             SetKings();
+            SetBishops();
+        }
+
+        private void SetBishops()
+        {
+            var tile = _tileContainer.GetTile(new Vector2Int(2, 0));
+            var lightBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
+            lightBishop.Init(tile.Position, PieceColor.Light);
+            tile.ChessPiece = lightBishop;
+            
+            LightPieces.Add(lightBishop);
         }
 
         private void SetPawns()
