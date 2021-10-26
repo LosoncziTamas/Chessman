@@ -11,7 +11,7 @@ namespace Chessman.Pieces
         [SerializeField] private Sprite _darkPawn;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        public Vector2Int Position { get; private set; }
+        public Vector2Int Position { get; set; }
         
         public PieceColor Color { get; private set; }
         
@@ -120,15 +120,7 @@ namespace Chessman.Pieces
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile from, Tile to)
         {
-            Debug.Assert(to.HasPiece);
-            var capturedPiece = to.ChessPiece;
-            
-            transform.position = to.transform.position;
-            Position = to.Position;
-            to.ChessPiece = this;
-            from.ChessPiece = null;
-
-            return capturedPiece;
+            return GameUtils.CapturePieceCommon(this, from, to);
         }
         
 

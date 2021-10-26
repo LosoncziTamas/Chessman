@@ -15,7 +15,7 @@ namespace Chessman.Pieces
             return Enumerable.Empty<Tile>();
         }
 
-        public Vector2Int Position { get; private set; }
+        public Vector2Int Position { get; set; }
         public PieceColor Color { get; private set; }
         public bool IsCaptured { get; set; }
         public Transform Transform { get; }

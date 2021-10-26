@@ -35,19 +35,30 @@ namespace Chessman.Pieces
 
         public void Setup()
         {
-            SetPawns();
-            SetKings();
+            //SetPawns();
+            //SetKings();
             SetBishops();
         }
 
         private void SetBishops()
         {
-            var tile = _tileContainer.GetTile(new Vector2Int(2, 0));
-            var lightBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
-            lightBishop.Init(tile.Position, PieceColor.Light);
-            tile.ChessPiece = lightBishop;
-            
-            LightPieces.Add(lightBishop);
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(2, 0));
+                var lightBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
+                lightBishop.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightBishop;
+
+                LightPieces.Add(lightBishop);
+            }
+
+            { 
+                var tile = _tileContainer.GetTile(new Vector2Int(2, 7));
+                var darkBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
+                darkBishop.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkBishop;
+                
+                DarkPieces.Add(darkBishop);
+            }
         }
 
         private void SetPawns()

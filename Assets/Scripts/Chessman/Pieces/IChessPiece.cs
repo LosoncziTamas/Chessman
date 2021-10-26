@@ -5,7 +5,7 @@ namespace Chessman.Pieces
 {
     public interface IChessPiece
     {
-        Vector2Int Position { get; }
+        Vector2Int Position { get; set; }
         PieceColor Color { get; }
         public bool IsCaptured { get; set; }
         Transform Transform { get; }
