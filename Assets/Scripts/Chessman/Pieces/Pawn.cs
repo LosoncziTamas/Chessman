@@ -27,9 +27,8 @@ namespace Chessman.Pieces
             }
             
             var walkableTilesToTest = GetTilesToTest(tileContainer);
-            var result = FilterWalkableTiles(tileContainer, pieces, walkableTilesToTest);
 
-            return result;
+            return walkableTilesToTest;
         }
 
         private List<Tile> GetTilesToTest(TileContainer tileContainer)

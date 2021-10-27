@@ -1,6 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;using Chessman.Pieces;
 using UnityEngine;
+
+using static Chessman.Pieces.GameUtils;
 
 namespace Chessman.Pieces
 {
@@ -44,7 +46,7 @@ namespace Chessman.Pieces
         {
             {
                 var tile = _tileContainer.GetTile(new Vector2Int(2, 0));
-                var lightBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
+                var lightBishop = Instantiate(_bishopPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
                 lightBishop.Init(tile.Position, PieceColor.Light);
                 tile.ChessPiece = lightBishop;
 
@@ -53,7 +55,7 @@ namespace Chessman.Pieces
 
             { 
                 var tile = _tileContainer.GetTile(new Vector2Int(2, 7));
-                var darkBishop = Instantiate(_bishopPrefab, tile.transform.position, Quaternion.identity, transform);
+                var darkBishop = Instantiate(_bishopPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
                 darkBishop.Init(tile.Position, PieceColor.Dark);
                 tile.ChessPiece = darkBishop;
                 
@@ -84,14 +86,14 @@ namespace Chessman.Pieces
         private void SetKings()
         {
             var tile = _tileContainer.GetTile(new Vector2Int(4, 0));
-            var lightKing = Instantiate(_kingPrefab, tile.transform.position, Quaternion.identity, transform);
+            var lightKing = Instantiate(_kingPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
             lightKing.Init(tile.Position, PieceColor.Light);
             tile.ChessPiece = lightKing;
 
             LightPieces.Add(lightKing);
             
             tile = _tileContainer.GetTile(new Vector2Int(4, 7));
-            var darkKing = Instantiate(_kingPrefab, tile.transform.position, Quaternion.identity, transform);
+            var darkKing = Instantiate(_kingPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
             darkKing.Init(tile.Position, PieceColor.Dark);
             tile.ChessPiece = darkKing;
 
