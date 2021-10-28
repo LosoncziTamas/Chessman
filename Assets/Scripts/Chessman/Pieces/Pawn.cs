@@ -37,21 +37,37 @@ namespace Chessman.Pieces
             
             if (Color == PieceColor.Light)
             {
-                var y = Math.Min(TileContainer.BoardDimensionY - 1, Position.y + 1);
-                var forwardTilePos = new Vector2Int(Position.x,  y);
-                walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));
+                if (Position.y == 1)
+                {
+                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  2)));
+                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  3)));
+                }
+                else
+                {
+                    var y = Math.Min(TileContainer.BoardDimensionY - 1, Position.y + 1);
+                    var forwardTilePos = new Vector2Int(Position.x,  y);
+                    walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));   
+                }
             }
             else
             {
-                var y = Math.Max(0, Position.y - 1);
-                var forwardTilePos = new Vector2Int(Position.x, y);
-                walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));
+                if (Position.y == 6)
+                {
+                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  5)));
+                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  4)));
+                }
+                else
+                {
+                    var y = Math.Max(0, Position.y - 1);
+                    var forwardTilePos = new Vector2Int(Position.x, y);
+                    walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));
+                }
             }
 
             return walkableTilesToTest;
         }
+        
         // TODO: fix overflow
-
         private List<Tile> FilterWalkableTiles(TileContainer tileContainer, ChessPieces pieces, List<Tile> walkableTilesToTest)
         {
             var testedWalkableTiles = new List<Tile>();
@@ -106,10 +122,7 @@ namespace Chessman.Pieces
         
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
-            transform.position = to.transform.position;
-            Position = to.Position;
-            to.ChessPiece = this;
-            from.ChessPiece = null;
+            GameUtils.MovePieceCommon(this, from, to);
 
             if (CanBePromoted())
             {

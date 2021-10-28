@@ -6342,6 +6342,7 @@ MonoBehaviour:
   _pawnPrefab: {fileID: 3649169046821257655, guid: 40203fa4516a34995bba041828f2846a, type: 3}
   _kingPrefab: {fileID: 4235678572849972036, guid: d2b9284f0d4d94529913cc11bdfa7ca3, type: 3}
   _bishopPrefab: {fileID: 2895556539467898342, guid: 1be85384703514a4b884dc446fe6cb67, type: 3}
+  _rookPrefab: {fileID: 770754771612591117, guid: 229e8887ef8d24a7881140b897268353, type: 3}
 --- !u!1 &5153959029788051029
 GameObject:
   m_ObjectHideFlags: 0

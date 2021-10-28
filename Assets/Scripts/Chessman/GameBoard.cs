@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Chessman.Pieces;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Chessman
 {
@@ -76,10 +75,18 @@ namespace Chessman
             {
                 _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
             }
+
+
+            Unselect();
+        }
+
+        private void Unselect()
+        {
             foreach (var walkableTile in _walkableTiles)
             {
                 walkableTile.ClearHighlight();
             }
+            
             _selectedTile.ClearHighlight();
             _selectedTile = null;
             _walkableTiles.Clear();
@@ -95,11 +102,17 @@ namespace Chessman
                     _selectedTile = tile;
                 }
             }
-
-            if (_selectedTile != null && _walkableTiles.Contains(tile))
+            else
             {
-                MovePieceToNewPosition(tile);
-                CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
+                if (_walkableTiles.Contains(tile))
+                {
+                    MovePieceToNewPosition(tile);
+                    CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
+                }
+                else
+                {
+                    Unselect();
+                }
             }
         }
     }

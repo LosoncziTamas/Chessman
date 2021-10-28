@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;using Chessman.Pieces;
+using System.Linq;
 using UnityEngine;
 
 using static Chessman.Pieces.GameUtils;
@@ -11,6 +11,7 @@ namespace Chessman.Pieces
         [SerializeField] private Pawn _pawnPrefab;
         [SerializeField] private King _kingPrefab;
         [SerializeField] private Bishop _bishopPrefab;
+        [SerializeField] private Rook _rookPrefab;
 
         private TileContainer _tileContainer;
         
@@ -35,17 +36,26 @@ namespace Chessman.Pieces
             Setup();
         }
 
-        public void Setup()
+        private void Setup()
         {
-            //SetPawns();
-            //SetKings();
+            SetPawns();
+            SetKings();
             SetBishops();
+            SetRooks();
         }
 
         private void SetBishops()
         {
             {
                 var tile = _tileContainer.GetTile(new Vector2Int(2, 0));
+                var lightBishop = Instantiate(_bishopPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightBishop.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightBishop;
+
+                LightPieces.Add(lightBishop);
+            }
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(5, 0));
                 var lightBishop = Instantiate(_bishopPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
                 lightBishop.Init(tile.Position, PieceColor.Light);
                 tile.ChessPiece = lightBishop;
@@ -61,21 +71,29 @@ namespace Chessman.Pieces
                 
                 DarkPieces.Add(darkBishop);
             }
+            { 
+                var tile = _tileContainer.GetTile(new Vector2Int(5, 7));
+                var darkBishop = Instantiate(_bishopPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkBishop.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkBishop;
+                
+                DarkPieces.Add(darkBishop);
+            }
         }
 
         private void SetPawns()
         {
-            for (var x = 0; x < 2; ++x)
+            for (var x = 0; x < 8; ++x)
             {
                 var tile = _tileContainer.GetTile(new Vector2Int(x, 1));
-                var lightPawn = Instantiate(_pawnPrefab, tile.transform.position, Quaternion.identity, transform);
+                var lightPawn = Instantiate(_pawnPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
                 lightPawn.Init(tile.Position, PieceColor.Light);
                 tile.ChessPiece = lightPawn;
 
                 LightPieces.Add(lightPawn);
                 
                 tile = _tileContainer.GetTile(new Vector2Int(x, 6));
-                var darkPawn = Instantiate(_pawnPrefab, tile.transform.position, Quaternion.identity, transform);
+                var darkPawn = Instantiate(_pawnPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
                 darkPawn.Init(tile.Position, PieceColor.Dark);
                 tile.ChessPiece = darkPawn;
                 
@@ -98,6 +116,48 @@ namespace Chessman.Pieces
             tile.ChessPiece = darkKing;
 
             DarkPieces.Add(darkKing);
+        }
+
+        private void SetKnights()
+        {
+            
+        }
+
+        private void SetRooks()
+        {
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(0, 0));
+                var lightRook = Instantiate(_rookPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightRook.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightRook;
+
+                LightPieces.Add(lightRook);
+            }
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(7, 0));
+                var lightRook = Instantiate(_rookPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightRook.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightRook;
+
+                LightPieces.Add(lightRook);
+            }
+            
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(0, 7));
+                var darkRook = Instantiate(_rookPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkRook.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkRook;
+
+                LightPieces.Add(darkRook);
+            }
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(7, 7));
+                var darkRook = Instantiate(_rookPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkRook.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkRook;
+
+                LightPieces.Add(darkRook);
+            }
         }
     }
 }
