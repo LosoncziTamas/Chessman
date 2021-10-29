@@ -27,7 +27,6 @@ namespace Chessman.Pieces
             return capturedPiece;
         }
 
-        // TODO: fix ordering issues
         public static void SetSortingOrderBasedOnPosition(SpriteRenderer spriteRenderer, Vector2Int position)
         {
             spriteRenderer.sortingOrder = (TileContainer.BoardDimensionY - position.y) + 1;

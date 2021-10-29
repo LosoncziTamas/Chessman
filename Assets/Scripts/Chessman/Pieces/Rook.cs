@@ -20,6 +20,7 @@ namespace Chessman.Pieces
             GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, position);
             Position = position;
             Color = color;
+            gameObject.name = $"{color} Rook {position.x}";
         }
 
         public void MovePiece(TileContainer tileContainer, Tile @from, Tile to)
@@ -91,7 +92,6 @@ namespace Chessman.Pieces
 
                 if (tileToTest.HasPiece)
                 {
-                    if (tileToTest.ChessPiece.Color != Color)
                     {
                         walkableTiles.Add(tileToTest);
                     }

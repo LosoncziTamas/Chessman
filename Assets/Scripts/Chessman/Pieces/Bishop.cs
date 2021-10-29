@@ -110,6 +110,7 @@ namespace Chessman.Pieces
             GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, position);
             Position = position;
             Color = color;
+            gameObject.name = $"{color} Bishop {position.x}";
         }
     }
 }

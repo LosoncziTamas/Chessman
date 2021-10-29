@@ -35,6 +35,8 @@ namespace Chessman.Pieces
             Position = position;
             Color = color;
             _spriteRenderer.sprite = color == PieceColor.Dark ? _darkKing : _lightKing;
+            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, Position);
+            gameObject.name = $"{color} King";
         }
     }
 }

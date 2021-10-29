@@ -123,7 +123,8 @@ namespace Chessman.Pieces
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
             GameUtils.MovePieceCommon(this, from, to);
-
+            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            
             if (CanBePromoted())
             {
                 // TODO: change sprite, use different movement pattern, set promoted flag to true
@@ -141,6 +142,8 @@ namespace Chessman.Pieces
             Position = position;
             Color = color;
             _spriteRenderer.sprite = color == PieceColor.Dark ? _darkPawn : _lightPawn;
+            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, Position);
+            gameObject.name = $"{color} Pawn {position.x}";
         }
     }
 }
