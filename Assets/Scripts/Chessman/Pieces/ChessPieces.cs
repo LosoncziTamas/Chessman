@@ -12,6 +12,7 @@ namespace Chessman.Pieces
         [SerializeField] private King _kingPrefab;
         [SerializeField] private Bishop _bishopPrefab;
         [SerializeField] private Rook _rookPrefab;
+        [SerializeField] private Knight _knightPrefab;
 
         private TileContainer _tileContainer;
         
@@ -42,6 +43,7 @@ namespace Chessman.Pieces
             SetKings();
             SetBishops();
             SetRooks();
+            SetKnights();
         }
 
         private void SetBishops()
@@ -120,7 +122,39 @@ namespace Chessman.Pieces
 
         private void SetKnights()
         {
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(1, 0));
+                var lightKnight = Instantiate(_knightPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightKnight.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightKnight;
+
+                LightPieces.Add(lightKnight);
+            }
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(6, 0));
+                var lightKnight = Instantiate(_knightPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightKnight.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightKnight;
+
+                LightPieces.Add(lightKnight);
+            }
             
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(1, 7));
+                var darkKnight = Instantiate(_knightPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkKnight.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkKnight;
+
+                DarkPieces.Add(darkKnight);
+            }
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(6, 7));
+                var darkKnight = Instantiate(_knightPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkKnight.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkKnight;
+
+                DarkPieces.Add(darkKnight);
+            }
         }
 
         private void SetRooks()
