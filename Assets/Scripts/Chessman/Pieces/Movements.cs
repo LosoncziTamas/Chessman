@@ -10,11 +10,12 @@ namespace Chessman.Pieces
         public enum MoveType
         {
             None = 0,
-            Pawn = 1 << 0,
-            Knight = 1 << 1,
-            Bishop = 1 << 2,
-            Rook = 1 << 3,
-            King = 1 << 4,
+            PawnForward = 1 << 0,
+            PawnBackward = 1 << 1,
+            Knight = 1 << 2,
+            Bishop = 1 << 3,
+            Rook = 1 << 4,
+            King = 1 << 5,
         }
 
         public static IEnumerable<Vector2Int> GetMoves(Vector2Int position, MoveType moveType, TileContainer container)
@@ -32,6 +33,14 @@ namespace Chessman.Pieces
             if (moveType.HasFlag(MoveType.Rook))
             {
                 result.AddRange(GetRookMoves(position, container));
+            }            
+            if (moveType.HasFlag(MoveType.King))
+            {
+                result.AddRange(GetKingMoves(position));
+            }
+            if (moveType.HasFlag(MoveType.PawnForward))
+            {
+                result.AddRange(GetForwardPawnMoves(position, container));
             }
             
             return result;
@@ -187,5 +196,45 @@ namespace Chessman.Pieces
             
             return result;
         }
+
+        private static IEnumerable<Vector2Int> GetForwardPawnMoves(Vector2Int position, TileContainer tileContainer)
+        {
+            var result = new List<Vector2Int>();
+            
+            if (position.y == 1)
+            {
+                var pos = new Vector2Int(position.x, 2);
+                if (!tileContainer.GetTile(pos).HasPiece)
+                {
+                    result.Add(pos);
+                    pos = new Vector2Int(position.x, 3);
+                    if (!tileContainer.GetTile(pos).HasPiece)
+                    {
+                        result.Add(pos);
+                    }
+                }
+            }
+            else
+            {
+                var y = Math.Min(TileContainer.BoardDimensionY - 1, position.y + 1);
+                result.Add(new Vector2Int(position.x,  y));
+            }
+
+            var forwardLeft = new Vector2Int(position.x - 1, position.y + 1);
+            if (!tileContainer.OutsideOfBounds(forwardLeft) && tileContainer.GetTile(forwardLeft).HasPiece)
+            {
+                result.Add(forwardLeft);
+            }
+            
+            var forwardRight = new Vector2Int(position.x - 1, position.y + 1);
+            if (!tileContainer.OutsideOfBounds(forwardRight) && tileContainer.GetTile(forwardRight).HasPiece)
+            {
+                result.Add(forwardRight);
+            }
+            
+            return result;
+        }
+        
+
     }
 }

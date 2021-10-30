@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Chessman.Pieces
@@ -9,7 +10,7 @@ namespace Chessman.Pieces
 
         public static void MovePieceCommon(IChessPiece piece, Tile from, Tile to)
         {
-            piece.Transform.position = to.transform.position + PieceOffset;
+            piece.Transform.DOJump(to.transform.position + PieceOffset, 0.6f, 1, 0.6f);
             piece.Position = to.Position;
             to.ChessPiece = piece;
             from.ChessPiece = null;

@@ -18,27 +18,8 @@ namespace Chessman.Pieces
         
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
-            var left = new Vector2Int(Position.x - 1, Position.y);
-            var right = new Vector2Int(Position.x + 1, Position.y);
-            var forward = new Vector2Int(Position.x, Position.y + 1);
-            var backward = new Vector2Int(Position.x, Position.y - 1);
-            var leftForward = new Vector2Int(Position.x - 1, Position.y + 1);
-            var leftBackward = new Vector2Int(Position.x - 1, Position.y - 1);
-            var rightBackward = new Vector2Int(Position.x + 1, Position.y - 1);
-            var rightForward = new Vector2Int(Position.x + 1, Position.y + 1);
-
-            var result = FilterWalkableTiles(this, new List<Vector2Int>
-            {
-                left,
-                right,
-                forward,
-                backward,
-                leftForward,
-                leftBackward,
-                rightBackward,
-                rightForward,
-            }, tileContainer);
-            
+            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.King, tileContainer);
+            var result = FilterWalkableTiles(this, possibleMoves, tileContainer);
             return result;
         }
 

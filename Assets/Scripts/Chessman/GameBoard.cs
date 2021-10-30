@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Chessman.Pieces;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Chessman
 {
     public class GameBoard : MonoBehaviour
     {
+        private static readonly Vector3 ElevationOffset = Vector3.up * 0.3f;
         public PieceColor CurrentTurnColor { get; private set; } = PieceColor.Light;
     
         [SerializeField] private TileContainer _tileContainer;
@@ -39,7 +41,7 @@ namespace Chessman
                 {
                     var tile = go.GetComponent<Tile>();
                     Debug.Assert(tile != null);
-                    SelectTile(tile);
+                    OnTileClicked(tile);
                 }
             }
         }
@@ -75,8 +77,7 @@ namespace Chessman
             {
                 _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
             }
-
-
+            
             Unselect();
         }
 
@@ -92,12 +93,14 @@ namespace Chessman
             _walkableTiles.Clear();
         }
         
-        private void SelectTile(Tile tile)
+        private void OnTileClicked(Tile tile)
         {
             if (_selectedTile == null)
             {
                 if (tile.HasPiece && tile.ChessPiece.Color == CurrentTurnColor)
                 {
+                    var elevatedPos = tile.ChessPiece.Transform.position + ElevationOffset;
+                    tile.ChessPiece.Transform.DOMove(elevatedPos, 0.6f);
                     HighlightWalkableTiles(tile);
                     _selectedTile = tile;
                 }
@@ -111,6 +114,7 @@ namespace Chessman
                 }
                 else
                 {
+                    _selectedTile.ChessPiece.Transform.DOMove(_selectedTile.ChessPiece.Transform.position - ElevationOffset, 0.6f);
                     Unselect();
                 }
             }
