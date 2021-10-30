@@ -5,22 +5,24 @@ using static Chessman.Pieces.GameUtils;
 
 namespace Chessman.Pieces
 {
-    public class Bishop : MonoBehaviour, IChessPiece
+    public class Queen : MonoBehaviour, IChessPiece
     {
-        [SerializeField] private Sprite _lightBishop;
-        [SerializeField] private Sprite _darkBishop;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite _lightPiece;
+        [SerializeField] private Sprite _darkPiece;
         
         public Vector2Int Position { get; set; }
         public PieceColor Color { get; private set; }
         public bool IsCaptured { get; set; }
         public Transform Transform => gameObject.transform;
         
-        public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
+        public void Init(Vector2Int position, PieceColor color)
         {
-            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Bishop, tileContainer);
-            var result = FilterWalkableTiles(this, possibleMoves, tileContainer);
-            return result;
+            _spriteRenderer.sprite = color == PieceColor.Dark ? _darkPiece : _lightPiece;
+            SetSortingOrderBasedOnPosition(_spriteRenderer, position);
+            Position = position;
+            Color = color;
+            gameObject.name = $"{color} Queen {position.x}";
         }
 
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
@@ -35,13 +37,11 @@ namespace Chessman.Pieces
             return CapturePieceCommon(this, from, to);
         }
 
-        public void Init(Vector2Int position, PieceColor color)
+        public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
-            _spriteRenderer.sprite = color == PieceColor.Dark ? _darkBishop : _lightBishop;
-            SetSortingOrderBasedOnPosition(_spriteRenderer, position);
-            Position = position;
-            Color = color;
-            gameObject.name = $"{color} Bishop {position.x}";
+            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Bishop | Movements.MoveType.Knight, tileContainer);
+            var result = FilterWalkableTiles(this, possibleMoves, tileContainer);
+            return result;
         }
     }
 }

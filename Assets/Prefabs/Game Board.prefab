@@ -6344,6 +6344,7 @@ MonoBehaviour:
   _bishopPrefab: {fileID: 2895556539467898342, guid: 1be85384703514a4b884dc446fe6cb67, type: 3}
   _rookPrefab: {fileID: 770754771612591117, guid: 229e8887ef8d24a7881140b897268353, type: 3}
   _knightPrefab: {fileID: 5276729743500308816, guid: c4b59fcca1e574a26a4542e258d35ed9, type: 3}
+  _queenPrefab: {fileID: 1826769586646698677, guid: ccd3da1ff08664ba0956bc6253e22e40, type: 3}
 --- !u!1 &5153959029788051029
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace Chessman.Pieces
         [SerializeField] private Bishop _bishopPrefab;
         [SerializeField] private Rook _rookPrefab;
         [SerializeField] private Knight _knightPrefab;
+        [SerializeField] private Queen _queenPrefab;
 
         private TileContainer _tileContainer;
         
@@ -44,6 +45,28 @@ namespace Chessman.Pieces
             SetBishops();
             SetRooks();
             SetKnights();
+            SetQueens();
+        }
+
+        private void SetQueens()
+        {
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(3, 0));
+                var lightQueen = Instantiate(_queenPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                lightQueen.Init(tile.Position, PieceColor.Light);
+                tile.ChessPiece = lightQueen;
+
+                LightPieces.Add(lightQueen);
+            }
+            
+            {
+                var tile = _tileContainer.GetTile(new Vector2Int(3, 7));
+                var darkQueen = Instantiate(_queenPrefab, tile.transform.position + PieceOffset, Quaternion.identity, transform);
+                darkQueen.Init(tile.Position, PieceColor.Dark);
+                tile.ChessPiece = darkQueen;
+
+                DarkPieces.Add(darkQueen);
+            }
         }
 
         private void SetBishops()

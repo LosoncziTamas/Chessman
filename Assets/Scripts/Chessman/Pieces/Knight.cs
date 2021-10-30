@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+
+using static Chessman.Pieces.GameUtils;
 
 namespace Chessman.Pieces
 {
@@ -18,7 +19,7 @@ namespace Chessman.Pieces
         public void Init(Vector2Int position, PieceColor color)
         {
             _spriteRenderer.sprite = color == PieceColor.Dark ? _darkKnight : _lightKnight;
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, position);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, position);
             Position = position;
             Color = color;
             gameObject.name = $"{color} Knight {position.x}";
@@ -26,19 +27,21 @@ namespace Chessman.Pieces
 
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
-            GameUtils.MovePieceCommon(this, from, to);
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            MovePieceCommon(this, from, to);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
         }
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile @from, Tile to)
         {
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
-            return GameUtils.CapturePieceCommon(this, from, to);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            return CapturePieceCommon(this, from, to);
         }
 
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
-            return Enumerable.Empty<Tile>();
+            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Knight, tileContainer);
+            var result = FilterWalkableTiles(this, possibleMoves, tileContainer);
+            return result;
         }
     }
 }

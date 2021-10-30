@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Chessman.Pieces
@@ -30,6 +31,32 @@ namespace Chessman.Pieces
         public static void SetSortingOrderBasedOnPosition(SpriteRenderer spriteRenderer, Vector2Int position)
         {
             spriteRenderer.sortingOrder = (TileContainer.BoardDimensionY - position.y) + 1;
+        }
+
+        public static bool IsEnemyPieceOnTile(this IChessPiece piece, Tile tileToTest)
+        {
+            return tileToTest.HasPiece && tileToTest.ChessPiece.Color != piece.Color;
+        }
+        
+        public static IEnumerable<Tile> FilterWalkableTiles(IChessPiece forPiece, IEnumerable<Vector2Int> positionsToTest, TileContainer tileContainer)
+        {
+            var result = new List<Tile>();
+
+            foreach (var position in positionsToTest)
+            {
+                if (tileContainer.OutsideOfBounds(position))
+                {
+                    continue;
+                }
+                
+                var tile = tileContainer.GetTile(position);
+                if (!tile.HasPiece || forPiece.IsEnemyPieceOnTile(tile))
+                {
+                    result.Add(tile);
+                }
+            }
+            
+            return result;
         }
     }
 }

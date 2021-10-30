@@ -39,6 +39,11 @@ namespace Chessman
             }
         }
 
+        public bool OutsideOfBounds(Vector2Int position)
+        {
+            return position.x < 0 || position.x >= BoardDimensionX || position.y < 0 || position.y >= BoardDimensionY;
+        }
+
         public Tile GetTile(Vector2Int pos)
         {
             Debug.Assert(pos.x >= 0 && pos.x < BoardDimensionX, $"x: {pos.x}");
