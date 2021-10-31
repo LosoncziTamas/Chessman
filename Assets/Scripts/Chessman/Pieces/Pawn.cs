@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+using static Chessman.Pieces.GameUtils;
 
 namespace Chessman.Pieces
 {
@@ -31,44 +32,15 @@ namespace Chessman.Pieces
             return walkableTilesToTest;
         }
 
-        private List<Tile> GetTilesToTest(TileContainer tileContainer)
+        private IEnumerable<Tile> GetTilesToTest(TileContainer tileContainer)
         {
-            var walkableTilesToTest = new List<Tile>();
-            
-            if (Color == PieceColor.Light)
-            {
-                if (Position.y == 1)
-                {
-                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  2)));
-                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  3)));
-                }
-                else
-                {
-                    var y = Math.Min(TileContainer.BoardDimensionY - 1, Position.y + 1);
-                    var forwardTilePos = new Vector2Int(Position.x,  y);
-                    walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));   
-                }
-            }
-            else
-            {
-                if (Position.y == 6)
-                {
-                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  5)));
-                    walkableTilesToTest.Add(tileContainer.GetTile(new Vector2Int(Position.x,  4)));
-                }
-                else
-                {
-                    var y = Math.Max(0, Position.y - 1);
-                    var forwardTilePos = new Vector2Int(Position.x, y);
-                    walkableTilesToTest.Add(tileContainer.GetTile(forwardTilePos));
-                }
-            }
-
-            return walkableTilesToTest;
+            var moveType = Color == PieceColor.Light ? Movements.MoveType.PawnForward : Movements.MoveType.PawnBackward;
+            var moves = Movements.GetMoves(Position, moveType, tileContainer);
+            return FilterWalkableTiles(this, moves, tileContainer);
         }
         
         // TODO: fix overflow
-        private List<Tile> FilterWalkableTiles(TileContainer tileContainer, ChessPieces pieces, List<Tile> walkableTilesToTest)
+        private List<Tile> FilterWalkableTilesOld(TileContainer tileContainer, ChessPieces pieces, List<Tile> walkableTilesToTest)
         {
             var testedWalkableTiles = new List<Tile>();
             
@@ -122,8 +94,8 @@ namespace Chessman.Pieces
         
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
-            GameUtils.MovePieceCommon(this, from, to);
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            MovePieceCommon(this, from, to);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
             
             if (CanBePromoted())
             {
@@ -133,16 +105,15 @@ namespace Chessman.Pieces
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile from, Tile to)
         {
-            return GameUtils.CapturePieceCommon(this, from, to);
+            return CapturePieceCommon(this, from, to);
         }
         
-
         public void Init(Vector2Int position, PieceColor color)
         {
             Position = position;
             Color = color;
             _spriteRenderer.sprite = color == PieceColor.Dark ? _darkPawn : _lightPawn;
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, Position);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, Position);
             gameObject.name = $"{color} Pawn {position.x}";
         }
     }

@@ -20,11 +20,8 @@ namespace Chessman.Pieces
         {
             Debug.Assert(to.HasPiece);
             var capturedPiece = to.ChessPiece;
-            
-            piece.Transform.position = to.transform.position + PieceOffset;
-            piece.Position = to.Position;
-            to.ChessPiece = piece;
-            from.ChessPiece = null;
+
+            MovePieceCommon(piece, from, to);
 
             return capturedPiece;
         }
