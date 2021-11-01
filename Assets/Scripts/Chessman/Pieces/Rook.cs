@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using static Chessman.Pieces.GameUtils;
+
 namespace Chessman.Pieces
 {
     public class Rook : MonoBehaviour, IChessPiece
@@ -25,88 +27,21 @@ namespace Chessman.Pieces
 
         public void MovePiece(TileContainer tileContainer, Tile @from, Tile to)
         {
-            GameUtils.MovePieceCommon(this, from, to);
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            MovePieceCommon(this, from, to);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
         }
 
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
-            var walkableTiles = new List<Tile>();
-            
-            // forward
-            for (var y = Position.y + 1; y < TileContainer.BoardDimensionY; y++)
-            {
-                var positionToTest = new Vector2Int(Position.x, y);
-                var tileToTest = tileContainer.GetTile(positionToTest);
-
-                if (tileToTest.HasPiece)
-                {
-                    if (tileToTest.ChessPiece.Color != Color)
-                    {
-                        walkableTiles.Add(tileToTest);
-                    }
-                    break;
-                }
-                walkableTiles.Add(tileToTest);
-            }
-
-            // backward
-            for (var y = Position.y - 1; y >= 0; y--)
-            {
-                var positionToTest = new Vector2Int(Position.x, y);
-                var tileToTest = tileContainer.GetTile(positionToTest);
-
-                if (tileToTest.HasPiece)
-                {
-                    if (tileToTest.ChessPiece.Color != Color)
-                    {
-                        walkableTiles.Add(tileToTest);
-                    }
-                    break;
-                }
-                walkableTiles.Add(tileToTest);
-            }
-            
-            // left
-            for (var x = Position.x - 1; x >= 0; x--)
-            {
-                var positionToTest = new Vector2Int(x, Position.y);
-                var tileToTest = tileContainer.GetTile(positionToTest);
-
-                if (tileToTest.HasPiece)
-                {
-                    if (tileToTest.ChessPiece.Color != Color)
-                    {
-                        walkableTiles.Add(tileToTest);
-                    }
-                    break;
-                }
-                walkableTiles.Add(tileToTest);
-            }
-            
-            // right
-            for (var x = Position.x + 1; x < TileContainer.BoardDimensionX; x++)
-            {
-                var positionToTest = new Vector2Int(x, Position.y);
-                var tileToTest = tileContainer.GetTile(positionToTest);
-
-                if (tileToTest.HasPiece)
-                {
-                    {
-                        walkableTiles.Add(tileToTest);
-                    }
-                    break;
-                }
-                walkableTiles.Add(tileToTest);
-            }
-
-            return walkableTiles;
+            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Rook, tileContainer);
+            var result = FilterWalkableTiles(this, possibleMoves, tileContainer, pieces);
+            return result;
         }
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile @from, Tile to)
         {
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
-            return GameUtils.CapturePieceCommon(this, from, to);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            return CapturePieceCommon(this, from, to);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace Chessman.Pieces
@@ -36,11 +37,11 @@ namespace Chessman.Pieces
         {
             return tileToTest.HasPiece && tileToTest.ChessPiece.Color != piece.Color;
         }
-        
-        public static IEnumerable<Tile> FilterWalkableTiles(IChessPiece forPiece, IEnumerable<Vector2Int> positionsToTest, TileContainer tileContainer)
-        {
-            var result = new List<Tile>();
 
+        public static IEnumerable<Tile> FilterWalkableTiles(IChessPiece forPiece, IEnumerable<Vector2Int> positionsToTest, TileContainer tileContainer, ChessPieces chessPieces)
+        {
+            var walkableTilesToTest = new List<Tile>();
+            
             foreach (var position in positionsToTest)
             {
                 if (tileContainer.OutsideOfBounds(position))
@@ -51,18 +52,72 @@ namespace Chessman.Pieces
                 var tile = tileContainer.GetTile(position);
                 if (!tile.HasPiece || forPiece.IsEnemyPieceOnTile(tile))
                 {
-                    result.Add(tile);
+                    walkableTilesToTest.Add(tile);
                 }
             }
             
-            return result;
-        }
+            var playerKing = chessPieces.GetKing(forPiece.Color);
+            var currentTile = tileContainer.GetTile(forPiece.Position);
+            var oldPosition = forPiece.Position;
 
-        public static bool IsCheck(IEnumerable<Tile> walkableTiles, TileContainer tileContainer, ChessPieces chessPieces, PieceColor color)
-        {
-            var king = chessPieces.GetKing(color);
-            var kingTile = tileContainer.GetTile(king.Position);
-            return walkableTiles.Contains(kingTile);
+            var result = new List<Tile>();
+            
+            foreach (var walkableTile in walkableTilesToTest)
+            {
+                var originalPieceOnWalkable = walkableTile.ChessPiece;
+                
+                currentTile.ChessPiece = null;
+                forPiece.Position = walkableTile.Position;
+                walkableTile.ChessPiece = forPiece;
+                
+                var bishopMoves = Movements.GetMoves(playerKing.Position, Movements.MoveType.Bishop, tileContainer).Where(tileContainer.InsideBounds);
+                var bishopTiles = tileContainer.GetTiles(bishopMoves);
+                if (bishopTiles.FirstOrDefault(t=> t.HasPiece && playerKing.IsEnemyPieceOnTile(t) && (t.ChessPiece.GetType() == typeof(Bishop) || t.ChessPiece.GetType() == typeof(Queen))))
+                {
+                    currentTile.ChessPiece = forPiece;
+                    forPiece.Position = oldPosition;
+                    walkableTile.ChessPiece = originalPieceOnWalkable;
+                    continue;
+                }
+                
+                var rookMoves = Movements.GetMoves(playerKing.Position, Movements.MoveType.Rook, tileContainer).Where(tileContainer.InsideBounds);
+                var rookTiles = tileContainer.GetTiles(rookMoves);
+                if (rookTiles.FirstOrDefault(t=> t.HasPiece && playerKing.IsEnemyPieceOnTile(t) && (t.ChessPiece.GetType() == typeof(Rook) || t.ChessPiece.GetType() == typeof(Queen))))
+                {
+                    currentTile.ChessPiece = forPiece;
+                    forPiece.Position = oldPosition;
+                    walkableTile.ChessPiece = originalPieceOnWalkable;
+                    continue;
+                }
+                
+                var knightMoves = Movements.GetMoves(playerKing.Position, Movements.MoveType.Knight, tileContainer).Where(tileContainer.InsideBounds);
+                var knightTiles = tileContainer.GetTiles(knightMoves);
+                if (knightTiles.FirstOrDefault(t=> t.HasPiece && playerKing.IsEnemyPieceOnTile(t) && t.ChessPiece.GetType() == typeof(Knight)))
+                {
+                    currentTile.ChessPiece = forPiece;
+                    forPiece.Position = oldPosition;
+                    walkableTile.ChessPiece = originalPieceOnWalkable;
+                    continue;
+                }
+                
+                var pawnMoves = Movements.GetMoves(playerKing.Position, forPiece.Color == PieceColor.Light ? Movements.MoveType.PawnForward : Movements.MoveType.PawnBackward, tileContainer).Where(tileContainer.InsideBounds);
+                var pawnTiles = tileContainer.GetTiles(pawnMoves);
+                if (pawnTiles.FirstOrDefault(t=> t.HasPiece && playerKing.IsEnemyPieceOnTile(t) && t.ChessPiece.GetType() == typeof(Pawn)))
+                {
+                    currentTile.ChessPiece = forPiece;
+                    forPiece.Position = oldPosition;
+                    walkableTile.ChessPiece = originalPieceOnWalkable;
+                    continue;
+                }
+
+                result.Add(walkableTile);
+                
+                currentTile.ChessPiece = forPiece;
+                forPiece.Position = oldPosition;
+                walkableTile.ChessPiece = originalPieceOnWalkable;
+            }
+            
+            return result;
         }
     }
 }

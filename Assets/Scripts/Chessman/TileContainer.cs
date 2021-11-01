@@ -43,6 +43,11 @@ namespace Chessman
         {
             return position.x < 0 || position.x >= BoardDimensionX || position.y < 0 || position.y >= BoardDimensionY;
         }
+        
+        public bool InsideBounds(Vector2Int position)
+        {
+            return !OutsideOfBounds(position);
+        }
 
         public Tile GetTile(Vector2Int pos)
         {

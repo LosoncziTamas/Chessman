@@ -284,7 +284,5 @@ namespace Chessman.Pieces
             
             return result;
         }
-        
-
     }
 }

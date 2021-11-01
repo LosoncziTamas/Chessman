@@ -40,7 +40,7 @@ namespace Chessman.Pieces
 
         private void Setup()
         {
-            SetPawns();
+            // SetPawns();
             SetKings();
             SetBishops();
             SetRooks();
