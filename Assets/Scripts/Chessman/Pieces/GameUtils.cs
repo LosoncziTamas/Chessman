@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -55,6 +56,13 @@ namespace Chessman.Pieces
             }
             
             return result;
+        }
+
+        public static bool IsCheck(IEnumerable<Tile> walkableTiles, TileContainer tileContainer, ChessPieces chessPieces, PieceColor color)
+        {
+            var king = chessPieces.GetKing(color);
+            var kingTile = tileContainer.GetTile(king.Position);
+            return walkableTiles.Contains(kingTile);
         }
     }
 }
