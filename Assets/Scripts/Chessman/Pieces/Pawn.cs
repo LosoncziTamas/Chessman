@@ -57,6 +57,7 @@ namespace Chessman.Pieces
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile from, Tile to)
         {
+            SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
             return CapturePieceCommon(this, from, to);
         }
         

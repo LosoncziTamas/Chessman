@@ -92,6 +92,14 @@ namespace Chessman
             _selectedTile = null;
             _walkableTiles.Clear();
         }
+
+        private bool IsCheckMate()
+        {
+            var piecesInPlay = CurrentTurnColor == PieceColor.Dark ? _chessPieces.DarkPieces : _chessPieces.LightPieces;
+            piecesInPlay = piecesInPlay.Where(p => !p.IsCaptured).ToList();
+            var possibleMoves = piecesInPlay.Count(piece => piece.GetWalkableTiles(_tileContainer, _chessPieces).Any());
+            return possibleMoves == 0;
+        }
         
         private void OnTileClicked(Tile tile)
         {
@@ -110,7 +118,12 @@ namespace Chessman
                 if (_walkableTiles.Contains(tile))
                 {
                     MovePieceToNewPosition(tile);
+                    var prevTurnColor = CurrentTurnColor;
                     CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
+                    if (IsCheckMate())
+                    {
+                        Debug.Log($"Checkmate! {prevTurnColor} has won.");
+                    }
                 }
                 else
                 {
