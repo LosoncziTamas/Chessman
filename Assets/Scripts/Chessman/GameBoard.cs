@@ -70,7 +70,8 @@ namespace Chessman
             if (tile.HasPiece)
             {
                 var capturedPiece = _selectedTile.ChessPiece.MoveAndCapture(_tileContainer, _selectedTile, tile);
-                capturedPiece.Transform.SetParent(_capturedPieceContainer, false);
+                capturedPiece.Transform.SetParent(_capturedPieceContainer);
+                capturedPiece.Transform.DOJump(_capturedPieceContainer.position, 0.6f, 1, 1.0f);
                 capturedPiece.IsCaptured = true;
             }
             else

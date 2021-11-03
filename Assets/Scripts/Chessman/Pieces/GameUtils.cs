@@ -8,6 +8,8 @@ namespace Chessman.Pieces
 {
     public static class GameUtils
     {
+        // TODO: move to base class
+
         public static readonly Vector3 PieceOffset = new Vector3(0f, 0.5f, 0f);
 
         public static void MovePieceCommon(IChessPiece piece, Tile from, Tile to)
