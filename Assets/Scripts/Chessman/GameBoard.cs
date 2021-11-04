@@ -14,6 +14,8 @@ namespace Chessman
         [SerializeField] private TileContainer _tileContainer;
         [SerializeField] private Transform _capturedPieceContainer;
         [SerializeField] private ChessPieces _chessPieces;
+        [SerializeField] private AlignChildren _capturedLightPieces;
+        [SerializeField] private AlignChildren _capturedDarkPieces;
         
         private Camera _camera;
 
@@ -70,8 +72,14 @@ namespace Chessman
             if (tile.HasPiece)
             {
                 var capturedPiece = _selectedTile.ChessPiece.MoveAndCapture(_tileContainer, _selectedTile, tile);
-                capturedPiece.Transform.SetParent(_capturedPieceContainer);
-                capturedPiece.Transform.DOJump(_capturedPieceContainer.position, 0.6f, 1, 1.0f);
+                if (capturedPiece.Color == PieceColor.Light)
+                {
+                    _capturedLightPieces.AddChild(capturedPiece.Transform);
+                }
+                else
+                {
+                    _capturedDarkPieces.AddChild(capturedPiece.Transform);
+                }
                 capturedPiece.IsCaptured = true;
             }
             else
