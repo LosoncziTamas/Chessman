@@ -19,7 +19,7 @@ namespace Chessman.Pieces
         public void Init(Vector2Int position, PieceColor color)
         {
             _spriteRenderer.sprite = color == PieceColor.Dark ? _darkRook : _lightRook;
-            GameUtils.SetSortingOrderBasedOnPosition(_spriteRenderer, position);
+            SetSortingOrderBasedOnPosition(_spriteRenderer, position);
             Position = position;
             Color = color;
             gameObject.name = $"{color} Rook {position.x}";
