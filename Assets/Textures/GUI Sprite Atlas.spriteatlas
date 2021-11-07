@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GUI Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: f8643e827c49d4ef588c8be6dc3e5a36, type: 3}
+    totalSpriteSurfaceArea: 0
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 619042c03cf8b4765bb8ef36529e3ef0, type: 3}
+  - {fileID: 21300000, guid: e5cb16f0dda6542c59745d28f24a3e10, type: 3}
+  - {fileID: 21300000, guid: 501b9701356be41c181ad2fefc6c2012, type: 3}
+  - {fileID: 21300000, guid: b547ab11704d54373829f87f6b3a6740, type: 3}
+  - {fileID: 21300000, guid: df1270217b0fe444da2868db0e014004, type: 3}
+  - {fileID: 21300000, guid: 0132908177c0c43148decb8fe7f72c1d, type: 3}
+  - {fileID: 21300000, guid: fd96fbf1e33c9400e8d90d51077006ec, type: 3}
+  - {fileID: 21300000, guid: 6bc6a86278d024ff9a9e710b672d7271, type: 3}
+  - {fileID: 21300000, guid: ef54a7a222aa94a0291cd57e33aaa276, type: 3}
+  - {fileID: 21300000, guid: 68acb9731ba0c45a39340d038e1143ba, type: 3}
+  - {fileID: 21300000, guid: e844f0a32f18c475b82747857bfe2a8e, type: 3}
+  - {fileID: 21300000, guid: 6d096eb30efce4de3a507a6019201a30, type: 3}
+  - {fileID: 21300000, guid: eefd20e38a33e4d3abfe49512f51b3be, type: 3}
+  - {fileID: 21300000, guid: 2ed35d34b7576421f9107e6214f24ad4, type: 3}
+  - {fileID: 21300000, guid: 51eaffc44f94145e8a9c65fdba9ecda5, type: 3}
+  - {fileID: 21300000, guid: 3e34aed40da564e56a2bfa2dc3c78b5f, type: 3}
+  - {fileID: 21300000, guid: ac21d7e460d444f76aaaf4e4842e0136, type: 3}
+  - {fileID: 21300000, guid: ebe12df46b7154d569c634f47da92987, type: 3}
+  - {fileID: 21300000, guid: cb017825d676344dca084afd0726d7b4, type: 3}
+  - {fileID: 21300000, guid: 1a65e2f5f12174763ba99946b829fd94, type: 3}
+  - {fileID: 21300000, guid: ddb4d426b11594ac5bb458813de5bffc, type: 3}
+  - {fileID: 21300000, guid: 03512b364dd014a38af6a82e6bf53c13, type: 3}
+  - {fileID: 21300000, guid: 004726466450f4828850baddd8406a26, type: 3}
+  - {fileID: 21300000, guid: b39431663732d4d2d9c45cdc73c40d2a, type: 3}
+  - {fileID: 21300000, guid: 62eaca66130e84aa6a6901e249d2b7d2, type: 3}
+  - {fileID: 21300000, guid: afda8c968d67043bcb522044d442c1ad, type: 3}
+  - {fileID: 21300000, guid: 841931b675c5a43dda313a9f56ab8723, type: 3}
+  - {fileID: 21300000, guid: 371597c661e0c44919892d6f2e39af9b, type: 3}
+  - {fileID: 21300000, guid: f93a5ac6743cc4efcb98e5f27ff15f28, type: 3}
+  - {fileID: 21300000, guid: 006cba17ea8a74e5e9ee877b54f26ec2, type: 3}
+  - {fileID: 21300000, guid: cc3e4747f84b74962a948212741333eb, type: 3}
+  - {fileID: 21300000, guid: 95ee635791ee942d59ab153e19e3e727, type: 3}
+  - {fileID: 21300000, guid: 2e5068677fe504bbaaf53f7dfa097b94, type: 3}
+  - {fileID: 21300000, guid: e8ff15971a469449ba96c044e0eab327, type: 3}
+  - {fileID: 21300000, guid: 8d2c2ea77066147cf9d4fe45702b83e7, type: 3}
+  - {fileID: 21300000, guid: c66e22d7bedcf4470b8050d5a78ba328, type: 3}
+  - {fileID: 21300000, guid: e46cabd7714f944c385cc62653698965, type: 3}
+  - {fileID: 21300000, guid: cb6473e79bbe24e5b90547a6bda6f83d, type: 3}
+  - {fileID: 21300000, guid: 2a63d7187946e434a96ca936c09e2d92, type: 3}
+  - {fileID: 21300000, guid: 2f6f4348a75c44a74b4e126203e20ab1, type: 3}
+  - {fileID: 21300000, guid: da7c3068ea17943d1802f33353b08993, type: 3}
+  - {fileID: 21300000, guid: 9db783684bd4f433fabbf466aa128429, type: 3}
+  - {fileID: 21300000, guid: 59234f78c299b401b8bfc9b69ab3a36f, type: 3}
+  - {fileID: 21300000, guid: ce6b4588b034f4b69ac7d3eb01e79aaa, type: 3}
+  - {fileID: 21300000, guid: 6779a2a8ae405423e89905a488850e3c, type: 3}
+  - {fileID: 21300000, guid: f35aa5d8a21ad49298ad90bcddd7161e, type: 3}
+  - {fileID: 21300000, guid: 66265ee85b00d4792a5d6669edfb97cf, type: 3}
+  - {fileID: 21300000, guid: 2c02da09a8ea844749474c33e0504f31, type: 3}
+  - {fileID: 21300000, guid: e50cbb59dd24b4c228f6336c3a7715f1, type: 3}
+  - {fileID: 21300000, guid: 8a8e499906aba45f7928f2b5eefacd8e, type: 3}
+  - {fileID: 21300000, guid: a56cc9d9692e547d3a5a92261a79c1db, type: 3}
+  - {fileID: 21300000, guid: 2caf911a9b4494be39fd87e574433c73, type: 3}
+  - {fileID: 21300000, guid: a4a96f7a2096e4ff991a355d54d2c21e, type: 3}
+  - {fileID: 21300000, guid: 669a64aa32bdd4a1bbcfb627f9c889e5, type: 3}
+  - {fileID: 21300000, guid: 10ba24dad0f8d45839ff6efa723cae1a, type: 3}
+  - {fileID: 21300000, guid: feb78f2bafef84c71985e9cce244ff34, type: 3}
+  - {fileID: 21300000, guid: f8702f4bb2d2d486e990a2594a4b7178, type: 3}
+  - {fileID: 21300000, guid: 47c2486b6d2f8409cb3095074bae8dd7, type: 3}
+  - {fileID: 21300000, guid: 1bbac07b6fa8c474b8bba2f5b688ef3d, type: 3}
+  - {fileID: 21300000, guid: 8a41a98be917547adbeb039263313bdc, type: 3}
+  - {fileID: 21300000, guid: 21d1abab51185471fa2e9a81fd70cd85, type: 3}
+  - {fileID: 21300000, guid: d8858beb2dacb4c74a515c973682f32c, type: 3}
+  - {fileID: 21300000, guid: cc77c23ce4a4d47039c3964d775268c3, type: 3}
+  - {fileID: 21300000, guid: 4208073c610764d11b202dbfd8e8c348, type: 3}
+  - {fileID: 21300000, guid: a1c8e27c43b04455081ea5c4a4e2ac9f, type: 3}
+  - {fileID: 21300000, guid: b76c819c4321c42f7a09d532d387980c, type: 3}
+  - {fileID: 21300000, guid: 154d369cba8584f9aa28d6d9e32ff768, type: 3}
+  - {fileID: 21300000, guid: 0f901a9c5711e438c8a8b6a229762154, type: 3}
+  - {fileID: 21300000, guid: 6830cacc00a9e41cbab9fda9a35b9884, type: 3}
+  - {fileID: 21300000, guid: e73af2fce82bc41f6af54f215332f9b6, type: 3}
+  - {fileID: 21300000, guid: 9e1c536d3ffc3408dbe4f335137c650c, type: 3}
+  - {fileID: 21300000, guid: 52b3d56d5a8e1401dba896f9f2007e04, type: 3}
+  - {fileID: 21300000, guid: fef1397d22edf4fd3a7d535fe85cd191, type: 3}
+  - {fileID: 21300000, guid: 9026cb0e39b0b4cb993e23149d4d0b99, type: 3}
+  - {fileID: 21300000, guid: 284c9e0e2389d47fcb4b872f4003d36b, type: 3}
+  - {fileID: 21300000, guid: 7f7b602ed52734c968042f79f2ed91b8, type: 3}
+  - {fileID: 21300000, guid: 9282c33e54856418bb2e87642de9ec50, type: 3}
+  - {fileID: 21300000, guid: 61f9584eb9a2641229c8faf5c390d249, type: 3}
+  - {fileID: 21300000, guid: b9f13aae982514c09b003c45ed01b4f1, type: 3}
+  - {fileID: 21300000, guid: 2478d7de5c7664039afa0ae2aa8d9e63, type: 3}
+  - {fileID: 21300000, guid: 5a9298ee37db746199c0b3d6acef556f, type: 3}
+  - {fileID: 21300000, guid: effd2a3f41a6e42f9bceabe1f2a58abb, type: 3}
+  - {fileID: 21300000, guid: 9b6dd67ff987646a6a357ec1237769d9, type: 3}
+  - {fileID: 21300000, guid: 6d0695af8dfb44d7dabf6d00521a4575, type: 3}
+  - {fileID: 21300000, guid: 1c54c5bfb760d4595add6e6015a586d5, type: 3}
+  - {fileID: 21300000, guid: c12d30cfe68054de59de814de8f6d15f, type: 3}
+  - {fileID: 21300000, guid: 66c0a1efdd44d481ebef82521985412c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - arrowBlue_left
+  - iconCheck_blue
+  - iconCross_grey
+  - buttonRound_brown
+  - arrowBrown_right
+  - buttonRound_blue
+  - barBlue_verticalMid
+  - barRed_verticalTop
+  - buttonRound_beige
+  - panel_blue
+  - panelInset_brown
+  - buttonSquare_beige
+  - barBlue_horizontalRight
+  - arrowSilver_left
+  - barGreen_horizontalRight
+  - iconCircle_grey
+  - arrowBlue_right
+  - buttonLong_grey_pressed
+  - cursorHand_blue
+  - barBlue_horizontalLeft
+  - arrowBrown_left
+  - barBack_horizontalRight
+  - barBack_verticalBottom
+  - cursorGauntlet_bronze
+  - cursorHand_grey
+  - buttonLong_blue
+  - panelInset_beigeLight
+  - barGreen_horizontalLeft
+  - iconCheck_bronze
+  - buttonSquare_grey_pressed
+  - iconCircle_beige
+  - iconCross_blue
+  - arrowSilver_right
+  - buttonLong_brown
+  - buttonSquare_brown
+  - barGreen_verticalBottom
+  - barBack_verticalMid
+  - cursorGauntlet_blue
+  - barBack_horizontalMid
+  - iconCheck_beige
+  - barYellow_horizontalRight
+  - panel_brown
+  - arrowBeige_right
+  - buttonSquare_beige_pressed
+  - buttonLong_blue_pressed
+  - buttonSquare_blue_pressed
+  - buttonSquare_brown_pressed
+  - barRed_verticalMid
+  - cursorSword_gold
+  - cursorGauntlet_grey
+  - iconCheck_grey
+  - barYellow_verticalMid
+  - barBlue_verticalBottom
+  - barGreen_verticalMid
+  - barBack_horizontalLeft
+  - cursorSword_bronze
+  - barYellow_verticalTop
+  - panelInset_beige
+  - buttonLong_brown_pressed
+  - panel_beigeLight
+  - barRed_verticalBottom
+  - cursorHand_beige
+  - barBack_verticalTop
+  - panelInset_blue
+  - panel_beige
+  - iconCircle_blue
+  - iconCross_beige
+  - buttonSquare_grey
+  - barBlue_horizontalBlue
+  - buttonLong_beige
+  - buttonRound_grey
+  - buttonLong_beige_pressed
+  - barRed_horizontalMid
+  - barYellow_horizontalLeft
+  - iconCircle_brown
+  - barGreen_horizontalMid
+  - arrowBeige_left
+  - barYellow_verticalBottom
+  - barRed_horizontalRight
+  - buttonSquare_blue
+  - buttonLong_grey
+  - barGreen_verticalTop
+  - barRed_horizontalLeft
+  - cursorSword_silver
+  - barYellow_horizontalMid
+  - iconCross_brown
+  - barBlue_verticalTop
+  m_RenderDataMap: {}
+  m_Tag: GUI Sprite Atlas
+  m_IsVariant: 0
