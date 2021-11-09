@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Chessman.GUI;
 using Chessman.Pieces;
 using DG.Tweening;
 using UnityEngine;
@@ -18,13 +19,14 @@ namespace Chessman
         [SerializeField] private AlignChildren _capturedDarkPieces;
         
         private Camera _camera;
-
+        private GameCursor _cursor;
         private List<Tile> _walkableTiles;
         private Tile _selectedTile;
 
         private void Awake()
         {
             _camera = Camera.main;
+            _cursor = FindObjectOfType<GameCursor>();
         }
     
         private void Update()
@@ -129,6 +131,7 @@ namespace Chessman
                     MovePieceToNewPosition(tile);
                     var prevTurnColor = CurrentTurnColor;
                     CurrentTurnColor = CurrentTurnColor == PieceColor.Dark ? PieceColor.Light : PieceColor.Dark;
+                    _cursor.SetColor(CurrentTurnColor);
                     if (IsCheckMate())
                     {
                         Debug.Log($"Checkmate! {prevTurnColor} has won.");

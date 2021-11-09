@@ -11,6 +11,7 @@ namespace Chessman.GUI
 
         private void Awake()
         {
+            
         }
 
         private void OnGUI()
