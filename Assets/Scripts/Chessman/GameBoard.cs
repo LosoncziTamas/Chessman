@@ -13,7 +13,6 @@ namespace Chessman
         public PieceColor CurrentTurnColor { get; private set; } = PieceColor.Light;
     
         [SerializeField] private TileContainer _tileContainer;
-        [SerializeField] private Transform _capturedPieceContainer;
         [SerializeField] private ChessPieces _chessPieces;
         [SerializeField] private AlignChildren _capturedLightPieces;
         [SerializeField] private AlignChildren _capturedDarkPieces;
@@ -26,7 +25,7 @@ namespace Chessman
         private void Awake()
         {
             _camera = Camera.main;
-            _cursor = FindObjectOfType<GameCursor>();
+            _cursor = GameCursor.Instance;
         }
     
         private void Update()

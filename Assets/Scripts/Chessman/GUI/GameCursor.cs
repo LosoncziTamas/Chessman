@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace Chessman.GUI
 {
     public class GameCursor : MonoBehaviour
     {
-        // TODO: should be singleton
-        
+        public static GameCursor Instance { get; private set; }
+
         public Vector3 Offset;
 
         [SerializeField] private Color _lightTintColor;
@@ -13,15 +14,45 @@ namespace Chessman.GUI
         [SerializeField] private SpriteRenderer _spriteRenderer;
         
         private Camera _camera;
+        private Camera Camera
+        {
+            get
+            {
+                if (_camera == null)
+                {
+                    _camera = Camera.current;
+                }
+
+                return _camera;
+            }
+        }
         
         private void Awake()
         {
-            _camera = Camera.main;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this)
+            {
+                Instance = null;
+            }
         }
 
         private void Update()
         {
-            gameObject.transform.position = _camera.ScreenToWorldPoint(Input.mousePosition + Offset);
+            if (Camera == null)
+            {
+                return;
+            }
+            gameObject.transform.position = Camera.ScreenToWorldPoint(Input.mousePosition + Offset);
             if (Input.GetMouseButton(0))
             {
                 
