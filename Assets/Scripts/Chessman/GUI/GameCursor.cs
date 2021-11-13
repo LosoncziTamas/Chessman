@@ -5,6 +5,7 @@ namespace Chessman.GUI
 {
     public class GameCursor : MonoBehaviour
     {
+        // TODO: fix 
         public static GameCursor Instance { get; private set; }
 
         public Vector3 Offset;

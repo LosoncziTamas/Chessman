@@ -21,11 +21,13 @@ namespace Chessman
         private GameCursor _cursor;
         private List<Tile> _walkableTiles;
         private Tile _selectedTile;
+        private Panel _panel;
 
         private void Awake()
         {
             _camera = Camera.main;
             _cursor = GameCursor.Instance;
+            _panel = FindObjectOfType<Panel>();
         }
     
         private void Update()
@@ -133,7 +135,7 @@ namespace Chessman
                     _cursor.SetColor(CurrentTurnColor);
                     if (IsCheckMate())
                     {
-                        Debug.Log($"Checkmate! {prevTurnColor} has won.");
+                        _panel.ShowPanel(prevTurnColor);
                     }
                 }
                 else

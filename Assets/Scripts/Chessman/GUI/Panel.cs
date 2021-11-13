@@ -46,7 +46,6 @@ namespace Chessman.GUI
 
         private void OnRetryClicked()
         {
-            
             HidePanel();
         }
 
