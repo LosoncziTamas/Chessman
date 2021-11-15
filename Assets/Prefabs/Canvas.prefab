@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Light player won!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8c98f2660ccfc47409ff1bf5143be646, type: 2}
-  m_sharedMaterial: {fileID: -4576531804883140677, guid: 8c98f2660ccfc47409ff1bf5143be646, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbeb2469d72d64b7eb7ecaa09ffa4d25, type: 2}
+  m_sharedMaterial: {fileID: 2620650330665791393, guid: fbeb2469d72d64b7eb7ecaa09ffa4d25, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -549,8 +549,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Retry
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8c98f2660ccfc47409ff1bf5143be646, type: 2}
-  m_sharedMaterial: {fileID: -4576531804883140677, guid: 8c98f2660ccfc47409ff1bf5143be646, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbeb2469d72d64b7eb7ecaa09ffa4d25, type: 2}
+  m_sharedMaterial: {fileID: 2620650330665791393, guid: fbeb2469d72d64b7eb7ecaa09ffa4d25, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

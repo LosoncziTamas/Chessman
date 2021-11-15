@@ -11,6 +11,8 @@ namespace Chessman
     {
         private static readonly Vector3 ElevationOffset = Vector3.up * 0.3f;
         public PieceColor CurrentTurnColor { get; private set; } = PieceColor.Light;
+
+        public bool userRecordedData;
     
         [SerializeField] private TileContainer _tileContainer;
         [SerializeField] private ChessPieces _chessPieces;
@@ -22,32 +24,48 @@ namespace Chessman
         private List<Tile> _walkableTiles;
         private Tile _selectedTile;
         private Panel _panel;
+        private MoveRecorder _moveRecorder;
 
         private void Awake()
         {
             _camera = Camera.main;
             _cursor = GameCursor.Instance;
             _panel = FindObjectOfType<Panel>();
+            _moveRecorder = FindObjectOfType<MoveRecorder>();
         }
     
         private void Update()
         {
+            if (userRecordedData)
+            {
+                var loaded = _moveRecorder.GetMove();
+                if (loaded != null)
+                {
+                    CastRay(loaded.worldPos);
+                }
+                return;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-                if (hit.collider == null)
-                {
-                    return;
-                }
+                CastRay(mouseWorldPos);
+            }
+        }
+
+        private void CastRay(Vector3 mouseWorldPos)
+        {
+            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+            if (hit.collider == null)
+            {
+                return;
+            }
             
-                var go = hit.collider.gameObject;
-                if (go.CompareTag("Tile"))
-                {
-                    var tile = go.GetComponent<Tile>();
-                    Debug.Assert(tile != null);
-                    OnTileClicked(tile);
-                }
+            var go = hit.collider.gameObject;
+            if (go.CompareTag("Tile"))
+            {
+                var tile = go.GetComponent<Tile>();
+                Debug.Assert(tile != null);
+                OnTileClicked(tile);
             }
         }
 

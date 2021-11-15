@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3dbcb2ac1c96248d1979dc270fc3d205
+guid: 91388b81ec76f4af78e97b4dc14bedf9
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Helvetica
+  - Old English Five
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

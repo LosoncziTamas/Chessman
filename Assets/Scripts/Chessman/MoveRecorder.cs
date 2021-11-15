@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Chessman
@@ -11,37 +12,71 @@ namespace Chessman
         public class RecordedMove
         {
             public float time;
+            public float diff;
             public Vector3 worldPos;
 
-            public RecordedMove(float time, Vector3 worldPos)
+            public RecordedMove(float time, Vector3 worldPos, float diff)
             {
                 this.time = time;
                 this.worldPos = worldPos;
+                this.diff = diff;
             }
         }
 
         private const string FileName = "recorded.json";
+
+        public bool recordMoves;
         
         private Camera _camera;
         private List<RecordedMove> _recordedMoves = new List<RecordedMove>();
+        private List<RecordedMove> _loadedMoves = new List<RecordedMove>();
+        private int _loadedMoveIndex = 0;
+        private float _lastLoadedTime = 0;
 
         private void Awake()
         {
             _camera = Camera.main;
+            var loadedMovesText = File.ReadAllText(GetRecordedMovePath());
+            _loadedMoves = JsonHelper.FromJson<RecordedMove>(loadedMovesText).ToList();
         }
+
+        public RecordedMove GetMove()
+        {
+            if (_loadedMoves.Count - 1 > _loadedMoveIndex)
+            {
+                var next = _loadedMoves[_loadedMoveIndex];
+                if (next.diff <= Time.time - _lastLoadedTime)
+                {
+                    _loadedMoveIndex++;
+                    _lastLoadedTime = Time.time;
+                    return next;
+                }
+            }
+
+            return null;
+        }
+        
         private void Update()
         {
+            if (!recordMoves)
+            {
+                return;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                _recordedMoves.Add(new RecordedMove(Time.time, mouseWorldPos));
+                var count = _recordedMoves.Count;
+                var diff = count > 0 ? (Time.time - _recordedMoves[count - 1].time) : 0;
+                _recordedMoves.Add(new RecordedMove(Time.time, mouseWorldPos, diff));
             }
         }
+        
+        private string GetRecordedMovePath() => Path.Combine(Application.streamingAssetsPath, FileName);
 
         private void OnDestroy()
         {
             var moves = JsonHelper.ToJson(_recordedMoves.ToArray());
-            var path = Path.Combine(Application.streamingAssetsPath, FileName);
+            var path = GetRecordedMovePath();
             File.WriteAllText(path, moves);
         }
     }
