@@ -16,6 +16,7 @@ namespace Chessman.Pieces
             Bishop = 1 << 3,
             Rook = 1 << 4,
             King = 1 << 5,
+            Queen = Bishop | Rook
         }
 
         public static IEnumerable<Vector2Int> GetMoves(Vector2Int position, MoveType moveType, TileContainer container)

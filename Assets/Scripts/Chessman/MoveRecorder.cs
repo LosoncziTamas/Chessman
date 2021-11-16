@@ -24,6 +24,7 @@ namespace Chessman
         }
 
         private const string FileName = "recorded.json";
+        private const string PromotionFileName = "promotion_recorded.json";
 
         public bool recordMoves;
         
@@ -36,16 +37,16 @@ namespace Chessman
         private void Awake()
         {
             _camera = Camera.main;
-            var loadedMovesText = File.ReadAllText(GetRecordedMovePath());
+            var loadedMovesText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, PromotionFileName));
             _loadedMoves = JsonHelper.FromJson<RecordedMove>(loadedMovesText).ToList();
         }
 
         public RecordedMove GetMove()
         {
-            if (_loadedMoves.Count - 1 > _loadedMoveIndex)
+            if (_loadedMoves.Count - 1 >= _loadedMoveIndex)
             {
                 var next = _loadedMoves[_loadedMoveIndex];
-                if (next.diff <= Time.time - _lastLoadedTime)
+                if (next.diff * 0.9f <= Time.time - _lastLoadedTime)
                 {
                     _loadedMoveIndex++;
                     _lastLoadedTime = Time.time;
@@ -75,9 +76,12 @@ namespace Chessman
 
         private void OnDestroy()
         {
-            var moves = JsonHelper.ToJson(_recordedMoves.ToArray());
-            var path = GetRecordedMovePath();
-            File.WriteAllText(path, moves);
+            if (recordMoves)
+            {
+                var moves = JsonHelper.ToJson(_recordedMoves.ToArray());
+                var path = GetRecordedMovePath();
+                File.WriteAllText(path, moves);
+            }
         }
     }
     

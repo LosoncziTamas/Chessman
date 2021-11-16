@@ -8,8 +8,7 @@ namespace Chessman.Pieces
 {
     public class Pawn : MonoBehaviour, IChessPiece
     {
-        [SerializeField] private Sprite _lightPawn;
-        [SerializeField] private Sprite _darkPawn;
+        [SerializeField] private Sprites _sprites;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         public Vector2Int Position { get; set; }
@@ -19,6 +18,8 @@ namespace Chessman.Pieces
         public bool IsCaptured { get; set; } = false;
         
         public Transform Transform => transform;
+
+        private Movements.MoveType _promotedMoveType = Movements.MoveType.None;
 
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
@@ -35,13 +36,17 @@ namespace Chessman.Pieces
         private IEnumerable<Tile> GetTilesToTest(TileContainer tileContainer, ChessPieces pieces)
         {
             var moveType = Color == PieceColor.Light ? Movements.MoveType.PawnForward : Movements.MoveType.PawnBackward;
+            if (_promotedMoveType != Movements.MoveType.None)
+            {
+                moveType = _promotedMoveType;
+            }
             var moves = Movements.GetMoves(Position, moveType, tileContainer);
             return FilterWalkableTiles(this, moves, tileContainer, pieces);
         }
         
         private bool CanBePromoted()
         {
-            return Color == PieceColor.Light && Position.y == TileContainer.BoardDimensionY || Color == PieceColor.Dark && Position.y == 0;
+            return Color == PieceColor.Light && Position.y == TileContainer.BoardDimensionY - 1 || Color == PieceColor.Dark && Position.y == 1;
         }
         
         public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
@@ -51,7 +56,9 @@ namespace Chessman.Pieces
             
             if (CanBePromoted())
             {
-                // TODO: change sprite, use different movement pattern, set promoted flag to true
+                
+                _promotedMoveType = Movements.MoveType.Queen;
+                _spriteRenderer.sprite = Color == PieceColor.Light ? _sprites.LightQueen : _sprites.DarkQueen;
             }
         }
 
@@ -65,7 +72,7 @@ namespace Chessman.Pieces
         {
             Position = position;
             Color = color;
-            _spriteRenderer.sprite = color == PieceColor.Dark ? _darkPawn : _lightPawn;
+            _spriteRenderer.sprite = color == PieceColor.Dark ? _sprites.DarkPawn : _sprites.LightPawn;
             SetSortingOrderBasedOnPosition(_spriteRenderer, Position);
             gameObject.name = $"{color} Pawn {position.x}";
         }

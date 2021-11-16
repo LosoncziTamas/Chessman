@@ -39,7 +39,7 @@ namespace Chessman.Pieces
 
         public IEnumerable<Tile> GetWalkableTiles(TileContainer tileContainer, ChessPieces pieces)
         {
-            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Bishop | Movements.MoveType.Rook, tileContainer);
+            var possibleMoves = Movements.GetMoves(Position, Movements.MoveType.Queen, tileContainer);
             var result = FilterWalkableTiles(this, possibleMoves, tileContainer, pieces);
             return result;
         }

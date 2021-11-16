@@ -281,7 +281,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3091617818899607553, guid: dab6d44ace989438a99f4b5296667c4d, type: 3}
       propertyPath: userRecordedData
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7682968574562836578, guid: dab6d44ace989438a99f4b5296667c4d, type: 3}
       propertyPath: m_Name
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb440852b874e3c8e1d0d8dca8fd1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordMoves: 1
+  recordMoves: 0
 --- !u!4 &653361351
 Transform:
   m_ObjectHideFlags: 0
@@ -445,6 +445,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5607051140791970014, guid: 8b867f75d57d14bbaa53f7272778313f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8055107546152407246, guid: 8b867f75d57d14bbaa53f7272778313f, type: 3}
       propertyPath: m_fontColor.a
       value: 0.5019608
