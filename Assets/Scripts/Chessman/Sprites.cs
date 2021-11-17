@@ -11,6 +11,12 @@ namespace Chessman
         [SerializeField] private Sprite _darkRook;
         [SerializeField] private Sprite _darkQueen;
         [SerializeField] private Sprite _lightQueen;
+        [SerializeField] private Sprite _darkBishop;
+        [SerializeField] private Sprite _lightBishop;
+        [SerializeField] private Sprite _darkKnight;
+        [SerializeField] private Sprite _lightKnight;
+        [SerializeField] private Sprite _darkKing;
+        [SerializeField] private Sprite _lightKing;
 
         public Sprite LightPawn => _lightPawn;
         public Sprite DarkPawn => _darkPawn;
@@ -22,5 +28,13 @@ namespace Chessman
         public Sprite DarkQueen => _darkQueen;
 
         public Sprite LightQueen => _lightQueen;
+
+        public Sprite DarkBishop => _darkBishop;
+
+        public Sprite LightBishop => _lightBishop;
+
+        public Sprite DarkKnight => _darkKnight;
+
+        public Sprite LightKnight => _lightKnight;
     }
 }
