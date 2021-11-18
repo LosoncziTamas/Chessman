@@ -18,3 +18,9 @@ MonoBehaviour:
   _darkRook: {fileID: 21300000, guid: d28326ad442d04c63a7e38ce4ea7dab0, type: 3}
   _darkQueen: {fileID: 21300000, guid: 0038a112dba404ff3bd66a67d84e6097, type: 3}
   _lightQueen: {fileID: 21300000, guid: 8a443db1ef13840278835608b4dbdbd3, type: 3}
+  _darkBishop: {fileID: 21300000, guid: 3375ffa24da3749a6811772893dcebf8, type: 3}
+  _lightBishop: {fileID: 21300000, guid: d084c21dd2f11496b97d6074139cc388, type: 3}
+  _darkKnight: {fileID: 21300000, guid: d4563f8ed84f14d658ca43d50b6f66c6, type: 3}
+  _lightKnight: {fileID: 21300000, guid: 5bf777364e2694e72be543280e2c843c, type: 3}
+  _darkKing: {fileID: 21300000, guid: 5e8f2bf6ea74148a78ec5dacf85aa19e, type: 3}
+  _lightKing: {fileID: 21300000, guid: 7eca082dcf30442c9b35c36ce7e3e718, type: 3}

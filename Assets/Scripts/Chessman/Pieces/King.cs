@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 using static Chessman.Pieces.GameUtils;
@@ -23,10 +24,11 @@ namespace Chessman.Pieces
             return result;
         }
 
-        public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
+        public Task MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
             MovePieceCommon(this, from, to);
             SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
+            return Task.CompletedTask;
         }
 
         public IChessPiece MoveAndCapture(TileContainer tileContainer, Tile @from, Tile to)

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Chessman.GUI;
 using UnityEngine;
 
 using static Chessman.Pieces.GameUtils;
@@ -49,16 +51,19 @@ namespace Chessman.Pieces
             return Color == PieceColor.Light && Position.y == TileContainer.BoardDimensionY - 1 || Color == PieceColor.Dark && Position.y == 1;
         }
         
-        public void MovePiece(TileContainer tileContainer, Tile from, Tile to)
+        public async Task MovePiece(TileContainer tileContainer, Tile from, Tile to)
         {
             MovePieceCommon(this, from, to);
             SetSortingOrderBasedOnPosition(_spriteRenderer, to.Position);
             
             if (CanBePromoted())
             {
-                
-                _promotedMoveType = Movements.MoveType.Queen;
-                _spriteRenderer.sprite = Color == PieceColor.Light ? _sprites.LightQueen : _sprites.DarkQueen;
+                // TODO: ignore game events
+                var modal = PromotePieceModal.Instance;
+                var promotion = await modal.Show(Color);
+                modal.Hide();
+                _promotedMoveType = promotion.movementType;
+                _spriteRenderer.sprite = promotion.sprite;
             }
         }
 

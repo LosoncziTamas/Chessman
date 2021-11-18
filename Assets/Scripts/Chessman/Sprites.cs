@@ -19,6 +19,7 @@ namespace Chessman
         [SerializeField] private Sprite _lightKing;
 
         public Sprite LightPawn => _lightPawn;
+        
         public Sprite DarkPawn => _darkPawn;
 
         public Sprite LightRook => _lightRook;
