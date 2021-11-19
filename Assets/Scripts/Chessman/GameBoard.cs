@@ -25,6 +25,7 @@ namespace Chessman
         private Tile _selectedTile;
         private Panel _panel;
         private MoveRecorder _moveRecorder;
+        private bool _ignoreClicks;
 
         private void Awake()
         {
@@ -45,7 +46,7 @@ namespace Chessman
                 }
                 return;
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !_ignoreClicks)
             {
                 var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 CastRay(mouseWorldPos);
@@ -88,7 +89,7 @@ namespace Chessman
             }
         }
 
-        private void MovePieceToNewPosition(Tile tile)
+        private async void MovePieceToNewPosition(Tile tile)
         {
             if (tile.HasPiece)
             {
@@ -105,7 +106,9 @@ namespace Chessman
             }
             else
             {
-                _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
+                _ignoreClicks = true;
+                await _selectedTile.ChessPiece.MovePiece(_tileContainer, _selectedTile, tile);
+                _ignoreClicks = false;
             }
             
             Unselect();

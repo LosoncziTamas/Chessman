@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace Chessman.GUI
         [SerializeField] private TextMeshProUGUI _mainText;
         [SerializeField] private Button _retryButton;
         [SerializeField] private CanvasGroup _canvasGroup;
+
+        private TaskCompletionSource<bool> _tcs;
 
         private void Start()
         {
@@ -49,15 +52,19 @@ namespace Chessman.GUI
             HidePanel();
         }
 
-        public void ShowPanel(PieceColor winner)
+        public Task ShowPanel(PieceColor winner)
         {
+            _tcs = new TaskCompletionSource<bool>();
             _mainText.text = Format(WonText, winner);
             _animator.SetBool(PanelOpen, true);
             SetInteractable(true);
+            return _tcs.Task;
         }
 
         public void HidePanel()
         {
+            _tcs?.SetResult(true);
+            _tcs = null;
             _animator.SetBool(PanelOpen, false);
             SetInteractable(false);
         }
